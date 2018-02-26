@@ -13,10 +13,10 @@ command = [FFMPEG_BIN,
            '-']
 pipe = sp.Popen(command, stdout=sp.PIPE, bufsize=10 ** 8)
 
-raw_audio = pipe.stdout.read(88200 * 20)
+raw_audio = pipe.stdout.read(88200 * 10)
 audio_array = numpy.fromstring(raw_audio, dtype="int16")
 audio_array = audio_array[::2]
-arrs = numpy.array_split(audio_array, 10)
+arrs = numpy.array_split(audio_array, 1)
 
 for subarr in arrs:
     fft_sign = numpy.abs(fft.rfft(subarr))
